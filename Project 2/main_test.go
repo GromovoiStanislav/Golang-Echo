@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"strconv"
 	"net/http"
 	"net/http/httptest"
@@ -14,9 +15,21 @@ import (
 func TestCreateUserRoute(t *testing.T) {
 	router := setupRouter()
 
-	// Assuming you have a JSON payload for creating a user
-	jsonStr := []byte(`{"name":"John Doe","age":30}`)
 	w := httptest.NewRecorder()
+
+	// Assuming you have a JSON payload for creating a user
+	// jsonStr := []byte(`{"name":"John Doe","age":30}`)
+	
+	// Создаем объект пользователя
+	user := NewUser{
+		Name: "John Doe",
+		Age:  30,
+	}
+	// Сериализуем пользователя в JSON
+	jsonStr, err := json.Marshal(user)
+	if err != nil {
+		panic(err)
+	}
 
 	req, _ := http.NewRequest("POST", "/users", bytes.NewBuffer(jsonStr))
 	req.Header.Set("Content-Type", "application/json")
@@ -71,10 +84,24 @@ func TestGetUserRoute(t *testing.T) {
 func TestUpdateUserRoute(t *testing.T) {
 	router := setupRouter()
 
+	w := httptest.NewRecorder()
+
 	// Assuming you have a user ID and a JSON payload for updating a user
 	userID := 1
-	jsonStr := []byte(`{"name":"Updated User","age":35}`)
-	w := httptest.NewRecorder()
+	//jsonStr := []byte(`{"name":"Updated User","age":35}`)
+	
+
+
+	// Создаем объект пользователя
+	user := NewUser{
+		Name: "Updated User",
+		Age:  35,
+	}
+	// Сериализуем пользователя в JSON
+	jsonStr, err := json.Marshal(user)
+	if err != nil {
+		panic(err)
+	}
 
 	req, _ := http.NewRequest("PUT", "/users/"+strconv.Itoa(userID), bytes.NewBuffer(jsonStr))
 	req.Header.Set("Content-Type", "application/json")

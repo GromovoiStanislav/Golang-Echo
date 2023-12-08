@@ -15,6 +15,11 @@ type User struct {
 	Age  int    `json:"age"`
 }
 
+type NewUser struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
 var users = []User{}
 
 func listUsers(c echo.Context) error {
