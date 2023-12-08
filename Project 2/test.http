@@ -1,0 +1,41 @@
+GET http://localhost:8080
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+Accept: application/json
+Cache-Control: no-cache
+
+{
+  "name": "John Doe",
+  "age": 25
+}
+
+
+###
+GET http://localhost:8080/users
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/users/1
+Accept: */*
+Cache-Control: no-cache
+
+###
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+Accept: application/json
+Cache-Control: no-cache
+
+{
+  "name": "Updated User",
+  "age": 30
+}
+
+###
+DELETE  http://localhost:8080/users/1
+Accept: */*
+Cache-Control: no-cache
