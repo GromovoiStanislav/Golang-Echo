@@ -101,6 +101,11 @@ func TestDeleteUserRoute(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, 200, w.Code)
+
+	// Assert the expected JSON response
+	expectedResponse := `{"message":"User deleted","userID":1}`
+	assert.JSONEq(t, expectedResponse, w.Body.String())
+
 	// Add more assertions based on the expected response body or headers
 }
 
@@ -115,5 +120,10 @@ func TestDeleteUserRouteNotFound(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, 404, w.Code)
+
+	// Assert the expected JSON response
+	expectedResponse := `{"error":"User not found"}`
+	assert.JSONEq(t, expectedResponse, w.Body.String())
+
 	// Add more assertions based on the expected response body or headers
 }
