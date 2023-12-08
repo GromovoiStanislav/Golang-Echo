@@ -5,6 +5,7 @@
 ```
 go mod init echo-example
 go get github.com/labstack/echo/v4
+go get github.com/labstack/echo/v4/middleware
 ```
 
 ### Start the server:
